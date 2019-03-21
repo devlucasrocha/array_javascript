@@ -1,0 +1,40 @@
+// Minha solucao do desafio: 
+
+// Array.prototype.filter2 = function(callback) {
+//     let newArray = []
+//     for (let i = 0; i < this.length; i++) {
+//         newArray.push(callback(this[i], i, this))
+//     }
+//     let returnArray = []
+//     for (let c in newArray) {
+//         if (newArray[c]) {
+//             returnArray.push(this[c])
+//         }
+//     }
+//     returnArray.pop()
+//     return returnArray
+// }
+
+// Solucao do professor:
+
+Array.prototype.filter2 = function(callback) {
+    const newArray = []
+    for (let i = 0; i < this.length; i++) {
+        if(callback(this[i], i, this)) {
+            newArray.push(this[i])
+        }
+    }
+    return newArray
+}
+
+const produtos = [
+    { nome: 'Notebook', preco: 2499, fragil: true },
+    { nome: 'iPad Pro', preco: 4199, fragil: true },
+    { nome: 'Copo de Vidro', preco: 12.49, fragil: true },
+    { nome: 'Copo de Plastico', preco: 18.99, fragil: false }
+]
+
+const caro = p => p.preco >= 500
+const fragil = p => p.fragil
+
+console.table(produtos.filter2(caro).filter2(fragil))
